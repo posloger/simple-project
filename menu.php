@@ -9,7 +9,13 @@
                         <a class="nav-link" href="total_village.php">Total Kelurahan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="user.php">User</a>
+                        <a class="nav-link" href="user.php">Pengguna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="change_password.php">Ganti Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chained_dropdown.php">Pilihan Bertingkat</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">

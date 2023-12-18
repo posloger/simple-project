@@ -35,7 +35,7 @@
                         <th scope="col">Nama Lengkap</th>
                         <th scope="col">Nama Pengguna</th>
                         <th scope="col">
-                            <a href="form_add_user.php" class="btn btn-primary btn-sm">Tambah</a>
+                            <a href="add_user.php" class="btn btn-primary btn-sm">Tambah</a>
                         </th>
                     </tr>
                 </thead>
@@ -56,8 +56,8 @@
                         <td><?= $r[1]; ?></td>
                         <td>@<?= $r[2]; ?></td>
                         <td>
-                            <a href="form_edit_user.php" class="btn btn-secondary btn-sm">Edit</a>
-                            <a href="delete_user.php" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="edit_user.php?id=<?= $r[0]; ?>" class="btn btn-secondary btn-sm">Edit</a>
+                            <a href="delete_user.php?id=<?= $r[0]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?');">Hapus</a>
                         </td>
                     </tr>
                 <?php

@@ -12,6 +12,7 @@
 
         if($result->num_rows > 0){
             $row = mysqli_fetch_assoc($result);
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['user_name'];
             $_SESSION['fullname'] = $row['user_fullname'];
             header("Location: home.php");
