@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 08:43 AM
+-- Generation Time: Dec 22, 2023 at 10:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_project_unisnu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marital`
+--
+
+CREATE TABLE `marital` (
+  `marital_id` int(11) NOT NULL,
+  `marital_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `marital`
+--
+
+INSERT INTO `marital` (`marital_id`, `marital_name`) VALUES
+(1, 'Belum Kawin'),
+(2, 'Kawin'),
+(3, 'Cerai Hidup'),
+(4, 'Cerai Mati');
 
 -- --------------------------------------------------------
 
@@ -91380,6 +91401,29 @@ INSERT INTO `reg_villages` (`id`, `district_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `religion`
+--
+
+CREATE TABLE `religion` (
+  `religion_id` int(11) NOT NULL,
+  `religion_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `religion`
+--
+
+INSERT INTO `religion` (`religion_id`, `religion_name`) VALUES
+(1, 'Islam'),
+(2, 'Kristen'),
+(3, 'Katolik'),
+(4, 'Hindu'),
+(5, 'Buddha'),
+(6, 'Konghucu');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -91387,19 +91431,30 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `user_fullname` varchar(100) NOT NULL,
   `user_name` varchar(50) NOT NULL,
-  `user_password` longtext NOT NULL
+  `user_password` longtext NOT NULL,
+  `citizen_id` varchar(16) DEFAULT NULL,
+  `birth_place` varchar(100) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
+  `blood_type` enum('A','B','AB','O') DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `village_id` char(13) DEFAULT NULL,
+  `religion_id` int(11) DEFAULT NULL,
+  `marital_id` int(11) DEFAULT NULL,
+  `job_title` varchar(100) DEFAULT NULL,
+  `citizen_type` enum('WNI','WNA') DEFAULT NULL,
+  `issued_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `user_fullname`, `user_name`, `user_password`) VALUES
-(1, 'Bayu Azhari', 'bayu', 'e10adc3949ba59abbe56e057f20f883e');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `marital`
+--
+ALTER TABLE `marital`
+  ADD PRIMARY KEY (`marital_id`);
 
 --
 -- Indexes for table `reg_districts`
@@ -91429,20 +91484,41 @@ ALTER TABLE `reg_villages`
   ADD KEY `villages_district_id_index` (`district_id`);
 
 --
+-- Indexes for table `religion`
+--
+ALTER TABLE `religion`
+  ADD PRIMARY KEY (`religion_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `fk_user_reg_villages1` (`village_id`),
+  ADD KEY `fk_user_religion1` (`religion_id`),
+  ADD KEY `fk_user_marital1` (`marital_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `marital`
+--
+ALTER TABLE `marital`
+  MODIFY `marital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `religion`
+--
+ALTER TABLE `religion`
+  MODIFY `religion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -91465,6 +91541,14 @@ ALTER TABLE `reg_regencies`
 --
 ALTER TABLE `reg_villages`
   ADD CONSTRAINT `village_district_foreign` FOREIGN KEY (`district_id`) REFERENCES `reg_districts` (`id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_marital1` FOREIGN KEY (`marital_id`) REFERENCES `marital` (`marital_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_user_reg_villages1` FOREIGN KEY (`village_id`) REFERENCES `reg_villages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_user_religion1` FOREIGN KEY (`religion_id`) REFERENCES `religion` (`religion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

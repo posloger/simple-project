@@ -17,6 +17,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="chained_dropdown.php">Pilihan Bertingkat</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="religion.php">Agama</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="marital.php">Status Perkawinan</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">

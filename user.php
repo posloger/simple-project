@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Home</title>
+        <title>Pengguna</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" rel="stylesheet" />
         <style>
@@ -32,6 +32,7 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
+                        <th scope="col">NIK</th>
                         <th scope="col">Nama Lengkap</th>
                         <th scope="col">Nama Pengguna</th>
                         <th scope="col">
@@ -53,9 +54,11 @@
                 ?>
                     <tr>
                         <th scope="row"><?= $no++; ?></th>
+                        <td><?= $r[4]; ?></td>
                         <td><?= $r[1]; ?></td>
                         <td>@<?= $r[2]; ?></td>
                         <td>
+                            <a href="detail_user.php?id=<?= $r[0]; ?>" class="btn btn-info btn-sm">Detail</a>
                             <a href="edit_user.php?id=<?= $r[0]; ?>" class="btn btn-secondary btn-sm">Edit</a>
                             <a href="delete_user.php?id=<?= $r[0]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?');">Hapus</a>
                         </td>
